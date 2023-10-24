@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './App.css'
+import { Item } from './components/Item';
 
-type ItemId = `${string}-${string}-${string}-${string}-${string}`;// or String,
+export type ItemId = `${string}-${string}-${string}-${string}-${string}`;// or String,
 interface Item {
   id: ItemId,
-  text: String,
+  text: string,
   timestamp: number,
 }
 
@@ -90,13 +91,12 @@ function App() {
                   {
                     items.map((item) => {
                       return (
-                        <li key={item.id}>
-                          {item.text}
-                          <button onClick={createHandleRemoveItem(item.id)}>
-                            Delete
-                          </button>
-                        </li>
-                      )
+                        <Item 
+                          {...item} 
+                          handleClick={createHandleRemoveItem(item.id)} 
+                          key={item.id}
+                        />
+                      ) 
                     })
                   }
                 </ul>  

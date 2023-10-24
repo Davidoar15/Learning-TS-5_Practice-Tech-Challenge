@@ -8,22 +8,24 @@ interface Item {
   timestamp: number,
 }
 
-const INITIAL_ITEMS: Item[] = [
-  {
-    id: crypto.randomUUID(),
-    text: "Element 1",
-    timestamp: Date.now(),
-  },
-  {
-    id: crypto.randomUUID(),
-    text: "Element 2",
-    timestamp: Date.now(),
-  },
-];
+/*
+  const INITIAL_ITEMS: Item[] = [
+    {
+      id: crypto.randomUUID(),
+      text: "Element 1",
+      timestamp: Date.now(),
+    },
+    {
+      id: crypto.randomUUID(),
+      text: "Element 2",
+      timestamp: Date.now(),
+    },
+  ];
+*/
 
 function App() {
 
-  const [items, setItems] = useState(INITIAL_ITEMS);
+  const [items, setItems] = useState<Item[]>([]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,7 +62,7 @@ function App() {
           <h1>Tech Challenge (React + TypeScript)</h1>
           <h2>Add and Delete elements from a List</h2>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} aria-label='Add elements'>
             <label>
               Insert Element:
               <input

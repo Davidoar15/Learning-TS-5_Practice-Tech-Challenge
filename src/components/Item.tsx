@@ -1,19 +1,16 @@
-import { ItemId } from "../App";
-
 interface ItemProps {
-    id: ItemId,
     text: string,
     handleClick: () => void,
-}
+};
 
-export function Item ({ id, text, handleClick }: ItemProps) {
+export function Item ({ text, handleClick }: ItemProps) {
 
     return (
-        <li key={id}>
+        <li>
             {text}
             <button onClick={handleClick}>
                 Delete
             </button>
         </li>
     )
-}
+};

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './App.css'
 
+type ItemId = `${string}-${string}-${string}-${string}-${string}`;// or String,
 interface Item {
-  id: `${string}-${string}-${string}-${string}-${string}`,// or String,
+  id: ItemId,
   text: String,
   timestamp: number,
 }
@@ -29,6 +30,7 @@ function App() {
 
     const { elements } = e.currentTarget;
 
+    // Validation of Input
     const input = elements.namedItem('item');
     const isInput = input instanceof HTMLInputElement;
     if (!isInput || input == null) return;
@@ -45,6 +47,12 @@ function App() {
 
     input.value = "";
   };
+
+  const createHandleRemoveItem = (id: ItemId) => () => {
+    setItems(prevItems => {
+      return prevItems.filter(currentItem => currentItem.id !== id)
+    })
+  }
 
   return (
       <main>
@@ -69,20 +77,32 @@ function App() {
 
         <section>
           <h2>List</h2>
-          <ul>
             {
-              items.map(item => {
-                return (
-                  <li key={item.id}>
-                    {item.text}
-                  </li>
-                )
-              })  
+              items.length === 0
+              ? (
+                <p>
+                  <strong>There are not Elements</strong>
+                </p>
+              ) : (
+                <ul>
+                  {
+                    items.map((item) => {
+                      return (
+                        <li key={item.id}>
+                          {item.text}
+                          <button onClick={createHandleRemoveItem(item.id)}>
+                            Delete
+                          </button>
+                        </li>
+                      )
+                    })
+                  }
+                </ul>  
+              )
             }
-          </ul>
         </section>
       </main>
   )
 }
 
-export default App
+export default App;

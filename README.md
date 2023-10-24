@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-## Exercise 1: 
+## Exercise: 
 
 Adding and deleting items from a list (React).
 
